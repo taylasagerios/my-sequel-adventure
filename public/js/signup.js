@@ -14,7 +14,7 @@ const signupFormHandler = async function(event) {
   });
 
   if (response.ok) {
-    document.location.replace('/startpage');
+    document.location.replace('/characterPage');
   } else {
     alert('Failed to sign up');
   }
