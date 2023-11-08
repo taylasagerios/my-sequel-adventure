@@ -37,6 +37,8 @@ CharacterPotion.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'characterpotion'
+    modelName: 'character_potion'
   }
-)
+);
+
+module.exports = CharacterPotion;
