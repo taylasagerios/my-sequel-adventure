@@ -1,70 +1,78 @@
 const router = require("express").Router();
-const { Character, CharacterPotion } = require("../../models");
+const { Character } = require("../../models");
 
-// Create a new character-portion interaction
-router.post("/character-portion", async (req, res) => {
+// Create a new character
+router.post("/characters", async (req, res) => {
   try {
-    const { characterId, portionId, action } = req.body;
+    const { name, health, attack, defense } = req.body;
+    const newCharacter = await Character.create({ name, health, attack, defense });
+    res.status(201).json(newCharacter);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to create a new character" });
+  }
+});
 
-    // Check if the character and portion exist in the database
+// Get all characters
+router.get("/characters", async (req, res) => {
+  try {
+    const characters = await Character.findAll();
+    res.json(characters);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to retrieve characters" });
+  }
+});
+
+// Get a specific character by ID
+router.get("/characters/:id", async (req, res) => {
+  const characterId = req.params.id;
+  try {
     const character = await Character.findByPk(characterId);
-    const portion = await Portion.findByPk(portionId);
-
-    if (!character || !portion) {
-      return res.status(404).json({ error: "Character or portion not found" });
-    }
-
-    // Create a new character-portion interaction record
-    const newInteraction = await CharacterPotion.create({ characterId, portionId, action });
-    res.status(201).json(newInteraction);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to create a character-portion interaction" });
-  }
-});
-
-// Get all character-portion interactions
-router.get("/character-portion", async (req, res) => {
-  try {
-    const interactions = await CharacterPotion.findAll();
-    res.json(interactions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve character-portion interactions" });
-  }
-});
-
-// Get character-portion interactions for a specific character or portion
-router.get("/character-portion/:characterId/:portionId", async (req, res) => {
-  const characterId = req.params.characterId;
-  const portionId = req.params.portionId;
-
-  try {
-    const interactions = await CharacterPotion.findAll({
-      where: { characterId, portionId },
-    });
-    res.json(interactions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve character-portion interactions" });
-  }
-});
-
-// Delete a character-portion interaction by ID
-router.delete("/character-portion/:id", async (req, res) => {
-  const interactionId = req.params.id;
-  try {
-    const deletedInteraction = await CharacterPotion.destroy({
-      where: { id: interactionId },
-    });
-    if (deletedInteraction === 1) {
-      res.json({ message: "Character-portion interaction deleted successfully" });
+    if (character) {
+      res.json(character);
     } else {
-      res.status(404).json({ error: "Character-portion interaction not found" });
+      res.status(404).json({ error: "Character not found" });
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to delete the character-portion interaction" });
+    res.status(500).json({ error: "Failed to retrieve the character" });
+  }
+});
+
+// Update a character by ID
+router.put("/characters/:id", async (req, res) => {
+  const characterId = req.params.id;
+  try {
+    const updatedCharacter = await Character.update(req.body, {
+      where: { id: characterId },
+    });
+    if (updatedCharacter[0] === 1) {
+      res.json({ message: "Character updated successfully" });
+    } else {
+      res.status(404).json({ error: "Character not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update the character" });
+  }
+});
+
+// Delete a character by ID
+router.delete("/characters/:id", async (req, res) => {
+  const characterId = req.params.id;
+  try {
+    const deletedCharacter = await Character.destroy({
+      where: { id: characterId },
+    });
+    if (deletedCharacter === 1) {
+      res.json({ message: "Character deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Character not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete the character" });
   }
 });
 
