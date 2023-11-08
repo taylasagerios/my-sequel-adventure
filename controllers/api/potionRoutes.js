@@ -1,78 +1,80 @@
-const router = require("express").Router();
-const { Portion } = require("../../models");
+const express = require("express");
+const router = express.Router();
+const { Potion } = require("../../models");
 
-// Create a new portion
+// Middleware to handle errors
+const handleError = (res, error) => {
+  console.error(error);
+  res.status(500).json({ error: "An error occurred" });
+};
+
+// Create a new portion (potion)
 router.post("/portions", async (req, res) => {
   try {
-    const { name, type, value } = req.body;
-    const newPortion = await Portion.create({ name, type, value });
+    const { name, potency } = req.body;
+    const newPortion = await Potion.create({ name, potency });
     res.status(201).json(newPortion);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to create a new portion" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
-// Get all portions
+// Get all portions (potions)
 router.get("/portions", async (req, res) => {
   try {
-    const portions = await Portion.findAll();
+    const portions = await Potion.findAll();
     res.json(portions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve portions" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
-// Get a specific portion by ID
+// Get a specific portion (potion) by ID
 router.get("/portions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
-    const portion = await Portion.findByPk(portionId);
+    const portion = await Potion.findByPk(portionId);
     if (portion) {
       res.json(portion);
     } else {
       res.status(404).json({ error: "Portion not found" });
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve the portion" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
-// Update a portion by ID
+// Update a portion (potion) by ID
 router.put("/portions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
-    const updatedPortion = await Portion.update(req.body, {
+    const [updatedCount] = await Potion.update(req.body, {
       where: { id: portionId },
     });
-    if (updatedPortion[0] === 1) {
+    if (updatedCount === 1) {
       res.json({ message: "Portion updated successfully" });
     } else {
       res.status(404).json({ error: "Portion not found" });
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to update the portion" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
-// Delete a portion by ID
+// Delete a portion (potion) by ID
 router.delete("/portions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
-    const deletedPortion = await Portion.destroy({
+    const deletedCount = await Potion.destroy({
       where: { id: portionId },
     });
-    if (deletedPortion === 1) {
+    if (deletedCount === 1) {
       res.json({ message: "Portion deleted successfully" });
     } else {
       res.status(404).json({ error: "Portion not found" });
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to delete the portion" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 

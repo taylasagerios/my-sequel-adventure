@@ -1,5 +1,12 @@
-const router = require("express").Router();
-const { Character, CharacterPotion } = require("../../models");
+const express = require("express");
+const router = express.Router();
+const { Character, CharacterPotion, Potion } = require("../../models");
+
+// Middleware to handle errors
+const handleError = (res, error) => {
+  console.error(error);
+  res.status(500).json({ error: "An error occurred" });
+};
 
 // Create a new character-portion interaction
 router.post("/character-portion", async (req, res) => {
@@ -8,18 +15,21 @@ router.post("/character-portion", async (req, res) => {
 
     // Check if the character and portion exist in the database
     const character = await Character.findByPk(characterId);
-    const portion = await Portion.findByPk(portionId);
+    const portion = await Potion.findByPk(portionId);
 
     if (!character || !portion) {
       return res.status(404).json({ error: "Character or portion not found" });
     }
 
     // Create a new character-portion interaction record
-    const newInteraction = await CharacterPotion.create({ characterId, portionId, action });
+    const newInteraction = await CharacterPotion.create({
+      character_id: characterId,
+      potion_id: portionId,
+      action,
+    });
     res.status(201).json(newInteraction);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to create a character-portion interaction" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
@@ -28,9 +38,8 @@ router.get("/character-portion", async (req, res) => {
   try {
     const interactions = await CharacterPotion.findAll();
     res.json(interactions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve character-portion interactions" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
@@ -41,12 +50,11 @@ router.get("/character-portion/:characterId/:portionId", async (req, res) => {
 
   try {
     const interactions = await CharacterPotion.findAll({
-      where: { characterId, portionId },
+      where: { character_id: characterId, potion_id: portionId },
     });
     res.json(interactions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to retrieve character-portion interactions" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
@@ -62,9 +70,8 @@ router.delete("/character-portion/:id", async (req, res) => {
     } else {
       res.status(404).json({ error: "Character-portion interaction not found" });
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to delete the character-portion interaction" });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
