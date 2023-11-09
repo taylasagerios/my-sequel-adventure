@@ -41,7 +41,7 @@ app.use(routes);
 
 // Start the Express server
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
+  console.log(`App listening on port http://localhost:${PORT}`);
     // Sync the Sequelize models to the database
   sequelize.sync({ force: false });
 });
