@@ -38,9 +38,16 @@ Character.init(
       allowNull: false,
       defaultValue: 10
     },
-    portrait: {
-      type: DataTypes.BLOB,
+    hair_color: {
+      type: DataTypes.STRING,
       allowNull: false
+    },
+    face_color: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    shirt_color: {
+      type: DataTypes.STRING,
     },
     user_id: {
       type: DataTypes.INTEGER,

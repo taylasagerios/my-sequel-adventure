@@ -19,7 +19,7 @@ CharacterPotion.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Character',
+        model: 'character',
         key: 'id'
       }
     },
@@ -27,7 +27,7 @@ CharacterPotion.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Potion',
+        model: 'potion',
         key: 'id'
       }
     }
