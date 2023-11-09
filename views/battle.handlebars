@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <p>Let the battle begin!</p>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto text-center">
+            <p> Player 1 vs Monster 1</p>
+        </div>
+        {{{#if won}}}
+        <div class="col-6 mx-auto text-left">
+            <p>You Won!</p>
+        </div>
+        {{{else}}}
+        <div class="col-6 mx-auto text-left">
+            <p>You Lost</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mx-auto text-left">
+            <button class="btn btn-primary" type="submit">Play Again</button>
+        </div>
+        <div class="col-3 mx-auto text-left">
+            <button class="btn btn-primary" type="submit">Exit</button>
+        </div>
+    </div>
+</div>
