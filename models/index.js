@@ -1,7 +1,8 @@
 const Character = require('./Character');
 const Potion = require('./Potion');
 const User = require('./User');
-const CharacterPotion = require('./CharacterPotion')
+const CharacterPotion = require('./CharacterPotion');
+const Monster = require('./Monster');
 
 User.hasMany(Character, {
   foreignKey: 'user_id',
@@ -22,4 +23,4 @@ Potion.belongsToMany(Character, {
   foreignKey: 'potion_id'
 });
 
-module.exports = { User, Character, Potion, CharacterPotion };
+module.exports = { User, Character, Potion, CharacterPotion, Monster };
