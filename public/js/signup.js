@@ -1,7 +1,7 @@
 const signupFormHandler = async function(event) {
   event.preventDefault();
 
-  const username = document.querySelector('#usernam-signup').value.trim();
+  const username = document.querySelector('#username-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
   console.log(username);
   console.log(password);
@@ -14,7 +14,7 @@ const signupFormHandler = async function(event) {
   });
 
   if (response.ok) {
-    document.location.replace('/characterPage');
+    document.location.replace('/');
   } else {
     alert('Failed to sign up');
   }
