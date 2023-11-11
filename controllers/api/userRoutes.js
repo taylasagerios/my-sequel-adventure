@@ -32,7 +32,6 @@ router.post('/login', async (req, res) => {
         username: req.body.username,
       },
     });
-
     if (!user) {
       res.status(400).json({ message: 'No user account found!' });
       return;
@@ -52,7 +51,7 @@ router.post('/login', async (req, res) => {
       req.session.username = user.username;
       req.session.loggedIn = true;
 
-      res.json({ user, message: 'You are now logged in!' });
+      res.status(200).json({ user, message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json({ message: 'Login failed!' });
@@ -64,7 +63,7 @@ router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     // Destroy the session on logout
     req.session.destroy(() => {
-      res.status(204).end();
+      res.status(200).end();
     });
   } else {
     res.status(404).end();

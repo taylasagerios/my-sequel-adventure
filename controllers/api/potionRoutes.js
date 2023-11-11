@@ -8,8 +8,8 @@ const handleError = (res, error) => {
   res.status(500).json({ error: "An error occurred" });
 };
 
-// Create a new portion (potion)
-router.post("/portions", async (req, res) => {
+// Create a new Potion (potion)
+router.post("/potions", async (req, res) => {
   try {
     const { name, potency } = req.body;
     const newPortion = await Potion.create({ name, potency });
@@ -19,59 +19,59 @@ router.post("/portions", async (req, res) => {
   }
 });
 
-// Get all portions (potions)
-router.get("/portions", async (req, res) => {
+// Get all potions (potions)
+router.get("/potions", async (req, res) => {
   try {
-    const portions = await Potion.findAll();
-    res.json(portions);
+    const potions = await Potion.findAll();
+    res.json(potions);
   } catch (error) {
     handleError(res, error);
   }
 });
 
-// Get a specific portion (potion) by ID
-router.get("/portions/:id", async (req, res) => {
+// Get a specific Potion (potion) by ID
+router.get("/potions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
-    const portion = await Potion.findByPk(portionId);
-    if (portion) {
-      res.json(portion);
+    const Potion = await Potion.findByPk(portionId);
+    if (Potion) {
+      res.json(Potion);
     } else {
-      res.status(404).json({ error: "Portion not found" });
+      res.status(404).json({ error: "Potion not found" });
     }
   } catch (error) {
     handleError(res, error);
   }
 });
 
-// Update a portion (potion) by ID
-router.put("/portions/:id", async (req, res) => {
+// Update a Potion (potion) by ID
+router.put("/potions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
     const [updatedCount] = await Potion.update(req.body, {
       where: { id: portionId },
     });
     if (updatedCount === 1) {
-      res.json({ message: "Portion updated successfully" });
+      res.json({ message: "Potion updated successfully" });
     } else {
-      res.status(404).json({ error: "Portion not found" });
+      res.status(404).json({ error: "Potion not found" });
     }
   } catch (error) {
     handleError(res, error);
   }
 });
 
-// Delete a portion (potion) by ID
-router.delete("/portions/:id", async (req, res) => {
+// Delete a Potion (potion) by ID
+router.delete("/potions/:id", async (req, res) => {
   const portionId = req.params.id;
   try {
     const deletedCount = await Potion.destroy({
       where: { id: portionId },
     });
     if (deletedCount === 1) {
-      res.json({ message: "Portion deleted successfully" });
+      res.json({ message: "Potion deleted successfully" });
     } else {
-      res.status(404).json({ error: "Portion not found" });
+      res.status(404).json({ error: "Potion not found" });
     }
   } catch (error) {
     handleError(res, error);

@@ -4,7 +4,7 @@ const Character = require("./characterRoutes");
 const CharacterPotion = require("./characterPotionRoutes");
 const Potion = require("./potionRoutes");
 
-router.use("/users", User);
+router.use("/user", User);
 router.use("/character", Character);
 router.use("/characterPotion", CharacterPotion);
 router.use("/potion", Potion);

@@ -11,10 +11,19 @@ router.get('/monsters', async (req, res) => {
 
     res.render('monster', {
       monsters,
-      logged_in: req.session.logged_in
+      loggedIn: req.session.loggedIn
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+router.get('/', withAuth, async (req, res) => {
+  res.render('homepage', {loggedIn: req.session.loggedIn});
+});
+
+router.get('/login', async (req, res) => {
+  res.render('login');
+});
+
+module.exports = router;

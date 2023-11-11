@@ -17,11 +17,13 @@ Character.init(
     },
     hitpoints: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 10
     },
     attack: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 9
     },
     experience: {
       type: DataTypes.INTEGER,
@@ -40,14 +42,18 @@ Character.init(
     },
     hair_color: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'yellow'
     },
     face_color: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'blue'
     },
     shirt_color: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'green'
     },
     user_id: {
       type: DataTypes.INTEGER,
