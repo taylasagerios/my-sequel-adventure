@@ -24,24 +24,25 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     // Find a user by their username
-    const user = await User.findOne({
+    const userData = await User.findOne({
       where: {
         username: req.body.username,
       },
     });
-    if (!user) {
+    if (!userData) {
       res.status(400).json({ message: 'No user account found!' });
       return;
     }
-
+    console.log(userData);
+    const user = userData.get({plain: true});
+    console.log(user);
     // Check the password provided against the stored hash
-    const validPassword = user.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect password!' });
       return;
     }
-
     // Save user information in the session and return a success message
     req.session.save(() => {
       req.session.userId = user.id;
