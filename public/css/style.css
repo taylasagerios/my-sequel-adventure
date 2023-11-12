@@ -1,0 +1,13 @@
+.monster-row:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.animated-button {
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.animated-button:hover {
+    background-color: #007bff; /* Darker shade of primary */
+    transform: translateY(-3px);
+}
