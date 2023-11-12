@@ -1,3 +1,10 @@
+
+body {
+    background-image: url('../images/backg.png'); /* Adjust path as necessary */
+    background-size: cover; /* Cover the entire page */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed; /* The background is fixed with regard to the viewport */
+}
 .monster-row:hover {
     transform: scale(1.05);
     cursor: pointer;
