@@ -1,23 +1,30 @@
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-auto">
-    <h2>Welcome back {{username}}!</h2>
+    <h2>Welcome back {{username}}!
+    </h2>
     <h3>Choose your character:</h3>
   </div>
 </div>
 {{#each characters}}
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-auto">
     {{>player-character}}
   </div>
   <div class="col-auto">
-    <p>Name: {{name}}</p>
-    <p>Hitpoints: {{hitpoints}}</p>
-    <p>Attack: {{attack}}</p>
-  </div>
-  <div class="col-auto">
-    <p>Experience: {{experience}}</p>
-    <p>Level: {{level}}</p>
-    <p>Gold: {{gold}}</p>
+    <div class="row">
+      <div class="col-auto">
+        <p>Name: {{name}}</p>
+        <p>Hitpoints: {{hitpoints}}</p>
+        <p>Attack: {{attack}}</p>
+      </div>
+      <div class="col-auto">
+        <p>Experience: {{experience}}</p>
+        <p>Level: {{level}}</p>
+        <p>Gold: {{gold}}</p>
+      </div>
+      <button type="button" class="btn btn-primary choice-btn" data-id="{{id}}" data-user="{{user_id}}">Select</div>
+    </div>
   </div>
 </div>
 {{/each}}
+<script src="/js/selectChar.js"></script>

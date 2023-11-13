@@ -68,4 +68,24 @@ router.post('/logout', (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const userData = await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    console.log(userData);
+    if(!userData[0]){
+      res.status(400).json({ message: 'No such user'});
+    }
+    else {
+      res.status(200).json(userData[0]);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

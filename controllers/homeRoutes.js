@@ -36,6 +36,7 @@ router.get('/characters', withAuth, async (req, res) => {
     where:  {
       user_id: req.session.userId
     },
+    order: [['name', 'ASC']]
   },
   );
   const characters = characterData.map((character) => character.get({ plain: true }));
