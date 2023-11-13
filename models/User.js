@@ -28,11 +28,6 @@
           len: [6]
         }
       },
-      chosen: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-      }
     },
     {
       hooks: {

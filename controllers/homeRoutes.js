@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 router.get('/monsters', async (req, res) => {
   try {
     const monsterData = await Monster.findAll({
-      order: [['level', 'ASC']]
+      order: [['id', 'ASC']]
     });
     const monsters = monsterData.map((monster) => monster.get({ plain: true }));
 
@@ -42,6 +42,10 @@ router.get('/characters', withAuth, async (req, res) => {
   const characters = characterData.map((character) => character.get({ plain: true }));
   console.log(characters);
   res.render('character-select',{characters: characters, username: req.session.username, loggedIn: req.session.loggedIn});
+});
+
+router.get('/battle', async (req, res) => {
+  
 });
 
 module.exports = router;

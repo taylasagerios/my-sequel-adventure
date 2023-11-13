@@ -9,14 +9,12 @@ charIds.forEach(btn => {
     console.log(button);
     const id = button.getAttribute('data-id');
     console.log(`data-id: ${id}`);
-    const user_id = button.getAttribute('data-user');
-    console.log(`data-user: ${user_id}`);
-    const response = await fetch(`/api/user/${user_id}`, {
-      method: 'PUT',
+    await fetch('/api/user/character', {
+      method: 'POST',
       body: JSON.stringify({
-        chosen: id
+        chosenChar: id
       }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     });
-  })
-})
+  });
+});
