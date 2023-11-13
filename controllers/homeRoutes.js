@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Monster, Character } = require('../models');
-const withAuth = require('../utils/auth');
+const { withAuth, chosen } = require('../utils/auth');
 
 router.get('/monsters', async (req, res) => {
   try {
@@ -18,15 +18,15 @@ router.get('/monsters', async (req, res) => {
   }
 });
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', withAuth, (req, res) => {
   res.render('homepage', {loggedIn: req.session.loggedIn});
 });
 
-router.get('/login', async (req, res) => {
+router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/signup', async (req, res) => {
+router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
@@ -44,8 +44,14 @@ router.get('/characters', withAuth, async (req, res) => {
   res.render('character-select',{characters: characters, username: req.session.username, loggedIn: req.session.loggedIn});
 });
 
-router.get('/battle', async (req, res) => {
-  
+router.get('/battle', chosen,  async (req, res) => {
+  const monData = await Monster.findByPk(req.session.chosenMon);
+  const monster = monData.get({ plain: true });
+  const charData = await Character.findByPk(req.session.chosenChar);
+  const char = charData.get({ plain: true });
+  console.log(monster);
+  console.log(char); 
+  res.render('battle', {monster: monster, character: char, loggedIn: req.session.loggedIn});
 });
 
 module.exports = router;

@@ -89,13 +89,17 @@ router.put('/:id', async (req, res) => {
 });
 
 router.post('/character', (req, res) => {
-  console.log(req.body);
   req.session.save(() => {
     req.session.chosenChar = req.body.chosenChar;
-    console.log('chosen char: ', req.session.chosenChar)
     res.status(200).json(req.session.chosenChar);
   });
-  
+});
+
+router.post('/monster', (req, res) => {
+  req.session.save(() => {
+    req.session.chosenMon = req.body.chosenMon;
+    res.status(200).json(req.session.chosenMon);
+  });
 });
 
 module.exports = router;

@@ -1,18 +1,18 @@
 <div class="container">
-    <div class="row">
+    <div class="row mx-auto text-center">
         <p>Let the battle begin!</p>
     </div>
     <div class="row">
         <div class="col-6 mx-auto text-center">
-            <p> Player 1 vs Monster 1</p>
+            <p> {{monster.name}} vs {{character.name}}</p>
         </div>
-        {{{#if won}}}
-        <div class="col-6 mx-auto text-left">
-            <p>You Won!</p>
+    </div>
+    <div class="row mx-auto justify-content-center">
+        <div class="col-6">
+            <img src="../images/{{monster.id}}.png" alt="{{monster.name}}" class="img-fluid rounded" style="max-height: 500px; max-width: 250px border: 3px solid white;">
         </div>
-        {{{else}}}
-        <div class="col-6 mx-auto text-left">
-            <p>You Lost</p>
+        <div class="col-6">
+            {{>battle-character}}
         </div>
     </div>
     <div class="row">
@@ -24,3 +24,4 @@
         </div>
     </div>
 </div>
+<scrip src="/js/battle.js"></scrip>

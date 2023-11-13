@@ -9,4 +9,16 @@ const withAuth = (req, res, next) => {
   }
 };
 
-module.exports = withAuth;
+const chosen = (req, res, next) => {
+  if(!req.session.chosenMon) {
+    res.redirect('/monsters');
+  }
+  else if(!req.session.chosenChar) {
+    res.redirect('/characters');
+  }
+  else {
+    next();
+  }
+}
+
+module.exports = { withAuth, chosen };

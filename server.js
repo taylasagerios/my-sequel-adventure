@@ -4,7 +4,6 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const helpers = require('./utils/helpers');
 const crypto = require('crypto');
 // Import your Sequelize configuration
 const sequelize = require('./config/config');
@@ -14,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Create an instance of Handlebars engine with custom helpers
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
 // Generate a secure random key
 const secretKey = crypto.randomBytes(64).toString('hex');
 const sess = {
