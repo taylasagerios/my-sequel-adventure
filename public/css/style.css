@@ -4,6 +4,7 @@ body {
     background-size: cover; /* Cover the entire page */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-attachment: fixed; /* The background is fixed with regard to the viewport */
+    color:rgb(250, 237, 221);
 }
 .monster-row:hover {
     transform: scale(1.05);
