@@ -7,6 +7,10 @@ const monsterAttack = monster.getAttribute('data-attack')
 const monsterAction = document.getElementById('monster-action');
 let playerChoice, monsterChoice;
 
+console.log(`player:`, player);
+console.log(`monster:`, monster);
+console.log('monsterAction', monsterAction);
+
 function playerAction(choice) {
   switch(choice){
     case 'attack':
@@ -20,6 +24,7 @@ function playerAction(choice) {
       break;
     case 'parry':
       if(monsterChoice === 'attack') {
+        playerHP -= monsterAttack * .5;
       }
       break;
     case 'potion':
@@ -30,13 +35,14 @@ function playerAction(choice) {
 function chooseMonsterAction() {
   let monsterChoices = ['attack','roar']
   monsterChoice = Math.floor(Math.random() * monsterChoices.length);
-  monsterAction.innerHTML(`The monster is going to ${monsterChoices[monsterChoice]}`);
+  monsterAction.innerHTML = `The monster is going to <mark>${monsterChoices[monsterChoice]}</mark>`;
 };
 
 chooseMonsterAction();
 
 const playerActions = document.querySelectorAll('.player-action');
-
+console.log(playerActions);
+console.log(monsterAction);
 playerActions.forEach(btn => {
   btn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -44,4 +50,4 @@ playerActions.forEach(btn => {
     playerChoice = button.getAttribute('data-choice');
     playerAction(playerChoice);
   })
-})
+});

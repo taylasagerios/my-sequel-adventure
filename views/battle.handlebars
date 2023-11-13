@@ -1,21 +1,25 @@
 <div class="container">
     <div class="row mx-auto text-center">
-        <p>Let the battle begin!</p>
+        <h2 class="h2">Let the battle begin!</h2>
     </div>
     <div class="row">
         <div class="col-6 mx-auto text-center">
-            <p> {{monster.name}} vs {{character.name}}</p>
+            <h2 class="h2"> {{monster.name}} vs {{character.name}}</h2>
         </div>
+        
     </div>
     <div class="row mx-auto justify-content-center">
-        <div class="col-4">
+        <div class="col-4" id="monster" data-hp="{{monster.hitpoints}}" data-attack="{{monster.attack}}">
             <img src="../images/{{monster.id}}.png" alt="{{monster.name}}" class="img-fluid rounded" style="max-height: 500px; max-width: 250px border: 3px solid white;">
-            
+            <p id="monster-action">Monster is looking at you menancingly</p>
         </div>
         <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-4" id="player" data-hp="{{character.hitpoints}}" data-attack="{{character.attack}}">
             {{>battle-character}}
-            <button class="btn btn-primary player-action"></button>
+        <br>
+            <button class="btn btn-primary player-action" data-action="attack">Attack</button>
+            <button class="btn btn-primary player-action" data-action="parry">Parry</button>
+            <button class="btn btn-primary player-action" data-action="potion">Potion</button>
         </div>
     </div>
     {{!-- <div class="row">
@@ -27,4 +31,4 @@
         </div>
     </div> --}}
 </div>
-<scrip src="/js/battle.js"></scrip>
+<script src="/js/battle.js"></script>

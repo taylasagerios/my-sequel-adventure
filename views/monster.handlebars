@@ -5,13 +5,9 @@
     </div>
     {{#each monsters}}
     <div class="row monster-row mb-4 p-4 rounded shadow" style="background: linear-gradient(135deg, rgba(171, 193, 35, 0.6), rgba(222, 244, 86, 0.6)); backdrop-filter: blur(5px); transition: transform 0.3s; color: white;">
-    {{!-- <div class="col-lg-6 col-md-12"> --}}
-            {{!-- <div class="row"> --}}
                 <div class="col-4 text-center">
                     <img src="../images/{{this.id}}.png" alt="{{this.name}}" class="img-fluid rounded" style="max-height: 250px; border: 3px solid white;">
                 </div>
-            {{!-- </div> --}}
-            {{!-- <div class="row mt-3"> --}}
                 <div class="col-4">
                     <h3>{{this.name}}</h3>
                     <p class="font-size-lg"><strong>Hitpoints:</strong> <span  style="color: #0496ff;" >{{this.hitpoints}}</span></p>
@@ -20,8 +16,6 @@
                     <p class="font-size-lg"><strong>Gold:</strong> <span  style="color: #ffc400;">{{this.gold}}</span></p>
                     <p>{{this.description}}</p>
                 </div>
-            {{!-- </div> --}}
-        {{!-- </div> --}}
         <div class="col-4 d-flex align-items-center justify-content-end">
             <div class="text-center">
                 <button class="btn btn-warning btn-lg mb-3 animated-button choice-btn" type="submit" data-id="{{this.id}}">Fight</button>
@@ -31,4 +25,3 @@
     {{/each}}
 </div>
 <script src="/js/selectMonster.js"></script>
-<script src="/js/fight.js"></script>
