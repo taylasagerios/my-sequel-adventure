@@ -38,10 +38,10 @@ Monster.init(
       allowNull: false,
       defaultValue: 10
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    }
+   description: {
+  type: DataTypes.TEXT,
+  allowNull: false,
+}
   },
   {
     sequelize,
