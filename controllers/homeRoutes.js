@@ -41,7 +41,7 @@ router.get('/characters', withAuth, async (req, res) => {
   );
   const characters = characterData.map((character) => character.get({ plain: true }));
   console.log(characters);
-  res.render('character-select',{characters: characters, username: req.session.username, loggedIn: req.session.loggedIn});
+  res.render('character-select',{characters: characters, username: req.session.username, userId: req.session.userId, loggedIn: req.session.loggedIn});
 });
 
 router.get('/battle', chosen,  async (req, res) => {

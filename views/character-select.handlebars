@@ -1,7 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-auto">
-    <h2>Welcome back {{username}}!
-    </h2>
+    <h2>Welcome back {{username}}!</h2>
     <h3>Choose your character:</h3>
   </div>
 </div>
@@ -27,4 +26,12 @@
   </div>
 </div>
 {{/each}}
+<div class="row justify-content-center">
+  <div class="col-auto form-group">
+    <label for="username-login">Name</label>
+    <input class="form-input" type="text" id="new-char-input"/>
+    <button type="button" class="btn btn-primary" id="new-char" data-user="{{userId}}">Create new character</button>
+  </div>
+</div>
+
 <script src="/js/selectChar.js"></script>

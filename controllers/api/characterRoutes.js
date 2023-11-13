@@ -9,27 +9,37 @@ const handleError = (res, error) => {
 };
 
 // Create a new character
-router.post('/characters', async (req, res) => {
+// router.post('/characters', async (req, res) => {
+//   try {
+//     const { name, hitpoints, attack, experience, level, gold, portrait, user_id } = req.body;
+//     const newCharacter = await Character.create({
+//       name,
+//       hitpoints,
+//       attack,
+//       experience,
+//       level,
+//       gold,
+//       portrait,
+//       user_id,
+//     });
+//     res.status(201).json(newCharacter);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
+
+router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
-    const { name, hitpoints, attack, experience, level, gold, portrait, user_id } = req.body;
-    const newCharacter = await Character.create({
-      name,
-      hitpoints,
-      attack,
-      experience,
-      level,
-      gold,
-      portrait,
-      user_id,
-    });
+    const newCharacter = await Character.create(req.body);
     res.status(201).json(newCharacter);
   } catch (error) {
-    handleError(res, error);
+    res.status(500).json(error);
   }
 });
 
 // Get all characters
-router.get('/characters', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const characters = await Character.findAll();
     res.json(characters);
@@ -39,7 +49,7 @@ router.get('/characters', async (req, res) => {
 });
 
 // Get a specific character by ID
-router.get('/characters/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const characterId = req.params.id;
   try {
     const character = await Character.findByPk(characterId);
@@ -54,7 +64,7 @@ router.get('/characters/:id', async (req, res) => {
 });
 
 // Update a character by ID
-router.put('/characters/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const characterId = req.params.id;
   try {
     const [updatedCount] = await Character.update(req.body, {
@@ -71,7 +81,7 @@ router.put('/characters/:id', async (req, res) => {
 });
 
 // Delete a character by ID
-router.delete('/characters/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const characterId = req.params.id;
   try {
     const deletedCount = await Character.destroy({

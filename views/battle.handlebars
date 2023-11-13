@@ -8,20 +8,23 @@
         </div>
     </div>
     <div class="row mx-auto justify-content-center">
-        <div class="col-6">
+        <div class="col-4">
             <img src="../images/{{monster.id}}.png" alt="{{monster.name}}" class="img-fluid rounded" style="max-height: 500px; max-width: 250px border: 3px solid white;">
+            
         </div>
-        <div class="col-6">
+        <div class="col-4"></div>
+        <div class="col-4">
             {{>battle-character}}
+            <button class="btn btn-primary player-action"></button>
         </div>
     </div>
-    <div class="row">
+    {{!-- <div class="row">
         <div class="col-3 mx-auto text-left">
             <button class="btn btn-primary" type="submit">Play Again</button>
         </div>
         <div class="col-3 mx-auto text-left">
             <button class="btn btn-primary" type="submit">Exit</button>
         </div>
-    </div>
+    </div> --}}
 </div>
 <scrip src="/js/battle.js"></scrip>
