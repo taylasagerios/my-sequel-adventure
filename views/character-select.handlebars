@@ -21,7 +21,10 @@
         <p>Level: {{level}}</p>
         <p>Gold: {{gold}}</p>
       </div>
-      <button type="button" class="btn btn-primary choice-btn" data-id="{{id}}" data-user="{{user_id}}">Select</div>
+      <div class="btn-group" role="group">
+      <button type="button" class="btn btn-primary choice-btn" data-id="{{id}}" data-user="{{user_id}}">Select</button>
+      <button type="button" class="btn btn-danger delete-btn" data-id="{{id}}" data-user="{{user_id}}">Delete</button>
+      </div>
     </div>
   </div>
 </div>
