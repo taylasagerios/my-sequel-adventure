@@ -9,26 +9,38 @@
         
     </div>
     <div class="row mx-auto justify-content-center">
-        <div class="col-4" id="monster" data-hp="{{monster.hitpoints}}" data-attack="{{monster.attack}}">
+        <div class="col-4" id="monster" data-hp="{{monster.hitpoints}}" data-attack="{{monster.attack}}" data-experience="{{monster.experience}}" data-gold="{{monster.gold}}">
+            <h3 class="h3" id="monster-hp">HP: {{monster.hitpoints}}</h3>
+            <br>
             <img src="../images/{{monster.id}}.png" alt="{{monster.name}}" class="img-fluid rounded" style="max-height: 500px; max-width: 250px border: 3px solid white;">
             <p id="monster-action">Monster is looking at you menancingly</p>
         </div>
         <div class="col-4"></div>
-        <div class="col-4" id="player" data-hp="{{character.hitpoints}}" data-attack="{{character.attack}}">
-            {{>battle-character}}
-        <br>
-            <button class="btn btn-primary player-action" data-action="attack">Attack</button>
-            <button class="btn btn-primary player-action" data-action="parry">Parry</button>
-            <button class="btn btn-primary player-action" data-action="potion">Potion</button>
-        </div>
+        <div class="col-4" id="character" data-id="{{character.id}}" data-hp="{{character.hitpoints}}" data-attack="{{character.attack}}" data-level="{{character.level}}" data-experience="{{character.experience}}" data-gold="{{character.gold}}">
+            <h3 class="h3" id="character-hp">HP: {{character.hitpoints}}</h3>
+            <br>
+                {{>battle-character}}
+            <br>
+                <button class="btn btn-primary character-action" data-action="attack">Attack</button>
+                <button class="btn btn-primary character-action" data-action="parry">Parry</button>
+                {{!-- <button class="btn btn-primary character-action" data-action="potion">Potion</button> --}}
+            </div>
     </div>
-    {{!-- <div class="row">
-        <div class="col-3 mx-auto text-left">
-            <button class="btn btn-primary" type="submit">Play Again</button>
-        </div>
-        <div class="col-3 mx-auto text-left">
-            <button class="btn btn-primary" type="submit">Exit</button>
-        </div>
-    </div> --}}
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5 h5" id="modal-label">Modal title</h5>
+      </div>
+      <div class="modal-body h5" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="play-again">Play Again</button>
+        <button type="button" class="btn btn-primary" id="exit">Exit</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <script src="/js/battle.js"></script>
