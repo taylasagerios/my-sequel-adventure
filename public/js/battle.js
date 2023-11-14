@@ -87,8 +87,8 @@ async function gainExp() {
   let updatedChar = {};
   if(charXP >= 100) {
     charXP -= 100;
-    updatedChar.hitpoints = parseInt(character.getAttribute('data-hp')) + (Math.floor(Math.random()*5)) + 1;
-    updatedChar.attack = parseInt(character.getAttribute('data-attack')) + (Math.floor(Math.random()*3)) + 1;
+    updatedChar.hitpoints = parseInt(character.getAttribute('data-hp')) + (Math.floor(Math.random()*5)) + 2;
+    updatedChar.attack = parseInt(character.getAttribute('data-attack')) + (Math.floor(Math.random()*3)) + 2;
     updatedChar.level = parseInt(character.getAttribute('data-level')) + 1;
   }
   updatedChar.experience = charXP; 
