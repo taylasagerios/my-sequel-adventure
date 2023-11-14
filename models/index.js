@@ -23,4 +23,4 @@ Potion.belongsToMany(Character, {
   foreignKey: 'potion_id'
 });
 
-module.exports = { User, Character, Potion, CharacterPotion, Monster };
+module.exports = { User, Character, Potion, CharacterPotion, Monster};
