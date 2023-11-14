@@ -1,7 +1,6 @@
-const charIds = document.querySelectorAll('.choice-btn');
+const charBtns = document.querySelectorAll('.choice-btn');
 
-console.log(charIds);
-charIds.forEach(btn => {
+charBtns.forEach(btn => {
   btn.addEventListener('click', async (event) =>  {
     event.preventDefault();
     const button = event.target;
@@ -19,6 +18,22 @@ charIds.forEach(btn => {
   });
 });
 
+const charDlt = document.querySelectorAll('.delete-btn');
+
+charDlt.forEach(btn => {
+  btn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const button = event.target;
+    const id = button.getAttribute('data-id');
+    const response = await fetch(`/api/character/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if(response.ok){
+      document.location.replace('/characters');
+    }
+  })
+})
 document.getElementById('new-char').addEventListener('click', async (event) => {
   event.preventDefault();
   const button = event.target;
@@ -37,4 +52,5 @@ document.getElementById('new-char').addEventListener('click', async (event) => {
   if(response.ok) {
     document.location.replace('/characters')
   }
-})
+});
+
