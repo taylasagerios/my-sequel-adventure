@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const characters = await Character.findAll();
-    res.json(characters);
+    res.status(200).json(characters);
   } catch (error) {
     handleError(res, error);
   }
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
     const character = await Character.findByPk(req.params.id);
     if (character) {
 
-      res.json(character.get({ plain: true }));
+      res.status(200).json(character.get({ plain: true }));
     } else {
       res.status(404).json({ error: 'Character not found' });
     }
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
       where: { id: characterId },
     });
     if (updatedCount === 1) {
-      res.json({ message: 'Character updated successfully' });
+      res.status(200).json({ message: 'Character updated successfully' });
     } else {
       res.status(404).json({ error: 'Character not found' });
     }
@@ -68,7 +68,7 @@ router.delete('/:id', async (req, res) => {
       where: { id: characterId },
     });
     if (deletedCount === 1) {
-      res.json({ message: 'Character deleted successfully' });
+      res.status(200).json({ message: 'Character deleted successfully' });
     } else {
       res.status(404).json({ error: 'Character not found' });
     }

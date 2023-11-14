@@ -58,3 +58,21 @@ document.getElementById('new-char').addEventListener('click', async (event) => {
   }
 });
 
+document.getElementById('delete-account').addEventListener('click', async (event) => {
+  event.preventDefault();
+  const btn = event.target;
+  const response = await fetch('/api/user/logout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if(response.ok) {
+    const deletion = await fetch(`/api/user/${btn.getAttribute('data-user')}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if(deletion.ok) {
+      alert('account has been deleted!')
+      document.location.replace('/')
+    }
+  }
+});

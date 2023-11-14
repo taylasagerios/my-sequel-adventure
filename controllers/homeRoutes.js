@@ -52,7 +52,7 @@ router.get('/battle', chosen,  async (req, res) => {
   res.render('battle', {monster: monster, character: char, loggedIn: req.session.loggedIn});
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', withAuth, (req, res) => {
   res.render('character-creation', { loggedIn: req.session.loggedIn, userId: req.session.userId });
 })
 module.exports = router;

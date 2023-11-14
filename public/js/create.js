@@ -50,7 +50,8 @@ createBtn.addEventListener('click', async (event) => {
         face_color: faceColor,
         shirt_color: shirtColor,
         user_id: btn.getAttribute('data-id')
-      }
+      },
+      headers: { 'Content-Type': 'application/json'}
     });
     if(response.ok){
       document.location.replace('/characters');

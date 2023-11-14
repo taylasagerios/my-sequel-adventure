@@ -88,6 +88,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+//adds chosen character to user session data
 router.post('/character', (req, res) => {
   req.session.save(() => {
     req.session.chosenChar = req.body.chosenChar;
@@ -95,11 +96,28 @@ router.post('/character', (req, res) => {
   });
 });
 
+//adds chosen monster to user session data
 router.post('/monster', (req, res) => {
   req.session.save(() => {
     req.session.chosenMon = req.body.chosenMon;
     res.status(200).json(req.session.chosenMon);
   });
+});
+
+router.delete('/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const deletedCount = await User.destroy({
+      where: { id: userId },
+    });
+    if (deletedCount === 1) {
+      res.status(200).json({ message: 'Character deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'Character not found' });
+    }
+  } catch (error) {
+    handleError(res, error);
+  }
 });
 
 module.exports = router;
