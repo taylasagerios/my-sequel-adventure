@@ -1,22 +1,20 @@
-<div class="container">
-    <div class="row mx-auto text-center">
-        <h2 class="h2">Let the battle begin!</h2>
-    </div>
-    <div class="row">
-        <div class="col-6 mx-auto text-center">
+<div class="container ">
+    <div class="row bg-dark bg-opacity-75 shadow rounded p-0">
+        <div class="col-6 mx-auto text-center ">
+            <h2 class="h2">Let the battle begin!</h2>
             <h2 class="h2"> {{monster.name}} vs {{character.name}}</h2>
         </div>
         
     </div>
-    <div class="row mx-auto justify-content-center">
-        <div class="col-4" id="monster" data-hp="{{monster.hitpoints}}" data-attack="{{monster.attack}}" data-experience="{{monster.experience}}" data-gold="{{monster.gold}}">
+    <div class="row mx-auto justify-content-center bg-dark bg-opacity-75 shadow rounded p-4 my-5">
+        <div class="col-4 text-center" id="monster" data-hp="{{monster.hitpoints}}" data-attack="{{monster.attack}}" data-experience="{{monster.experience}}" data-gold="{{monster.gold}}">
             <h3 class="h3" id="monster-hp">HP: {{monster.hitpoints}}</h3>
             <br>
             <img src="../images/{{monster.id}}.png" alt="{{monster.name}}" class="img-fluid rounded" style="max-height: 500px; max-width: 250px border: 3px solid white;">
-            <p id="monster-action">Monster is looking at you menancingly</p>
+            <h4 id="monster-action" class="h4">Monster is looking at you menancingly</h4>
         </div>
         <div class="col-4"></div>
-        <div class="col-4" id="character" data-id="{{character.id}}" data-hp="{{character.hitpoints}}" data-attack="{{character.attack}}" data-level="{{character.level}}" data-experience="{{character.experience}}" data-gold="{{character.gold}}">
+        <div class="col-4 text-center" id="character" data-id="{{character.id}}" data-hp="{{character.hitpoints}}" data-attack="{{character.attack}}" data-level="{{character.level}}" data-experience="{{character.experience}}" data-gold="{{character.gold}}">
             <h3 class="h3" id="character-hp">HP: {{character.hitpoints}}</h3>
             <br>
                 {{>battle-character}}

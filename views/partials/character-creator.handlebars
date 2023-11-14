@@ -1,9 +1,9 @@
-<canvas id="{{id}}" width="250" height="150"></canvas>
+<canvas id="canvas" width="250" height="500"></canvas>
 <script>
-    var canvas = document.getElementById("{{id}}");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext('2d');
 
- /*   ctx.beginPath();
+    ctx.beginPath();
     ctx.lineWidth = 7;
     ctx.moveTo(120, 50);
     ctx.lineTo(120, 275); //spine
@@ -45,7 +45,7 @@
     ctx.stroke();
 
 
-*/
+
     ctx.lineWidth = 2;
     //back hair
     ctx.beginPath();
@@ -58,14 +58,14 @@
     ctx.lineTo(80, 120);
     ctx.lineTo(80, 80);
     ctx.closePath();
-    ctx.fillStyle = "{{hair_color}}";
+    ctx.fillStyle = "white";
     ctx.fill();
     ctx.stroke();
 
     // headshape
     ctx.beginPath();
     ctx.arc(115, 60, 40, 0 , 2 * Math.PI);
-    ctx.fillStyle = "{{face_color}}";
+    ctx.fillStyle = "white";
     ctx.fill();
     ctx.stroke();
 
@@ -81,16 +81,15 @@
     ctx.lineTo(130, 30);
     ctx.lineTo(115, 25);
     ctx.lineTo(100, 30);
-    ctx.fillStyle = "{{hair_color}}";
+    ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
     ctx.stroke();
 
-/*
     //shirt color
     ctx.beginPath();
     ctx.moveTo(96, 170);
-    ctx.strokeStyle = "{{shirt_color}}";
+    ctx.strokeStyle = "white";
     ctx.lineWidth = 12;
     ctx.lineTo(120, 120);
     ctx.lineTo(144, 170);
@@ -98,6 +97,6 @@
     ctx.lineTo(120, 280);
     ctx.closePath();
     ctx.stroke();
-*/
+
     
 </script>
