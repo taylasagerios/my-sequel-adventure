@@ -50,11 +50,11 @@ router.get('/', async (req, res) => {
 
 // Get a specific character by ID
 router.get('/:id', async (req, res) => {
-  const characterId = req.params.id;
   try {
-    const character = await Character.findByPk(characterId);
+    const character = await Character.findByPk(req.params.id);
     if (character) {
-      res.json(character);
+
+      res.json(character.get({ plain: true }));
     } else {
       res.status(404).json({ error: 'Character not found' });
     }

@@ -1,53 +1,122 @@
-const player = document.getElementById('player');
+const character = document.getElementById('character');
 const monster = document.getElementById('monster');
-const playerHP = player.getAttribute('data-hp');
-const playerAttack = player.getAttribute('data-attack');
-const monsterHP = monster.getAttribute('data-hp');
-const monsterAttack = monster.getAttribute('data-attack')
+let characterHP = parseInt(character.getAttribute('data-hp'));
+const characterHit = document.getElementById('character-hp')
+const characterAttack = character.getAttribute('data-attack');
+let monsterHP = parseInt(monster.getAttribute('data-hp'));
+const monsterHit = document.getElementById('monster-hp');
+const monsterAttack = monster.getAttribute('data-attack');
 const monsterAction = document.getElementById('monster-action');
-let playerChoice, monsterChoice;
+let characterChoice, monsterChoice;
+const modalTitle = document.getElementById('modal-label');
+const modalBody = document.getElementById('modal-body');
+const endModal = new bootstrap.Modal(document.getElementById('modal'), {
+  keyboard: false
+});
+const characterActions = document.querySelectorAll('.character-action');
+const playAgain = document.getElementById('play-again');
+const exit = document.getElementById('exit');
 
-console.log(`player:`, player);
-console.log(`monster:`, monster);
-console.log('monsterAction', monsterAction);
+function updateHealth() {
+  characterHit.innerHTML = `HP: ${characterHP}`;
+  monsterHit.innerHTML = `HP: ${monsterHP}`;
+  return;
+}
 
-function playerAction(choice) {
+function characterAction(choice) {
+  console.log(choice);
+  console.log(monsterChoice);
   switch(choice){
     case 'attack':
       if(monsterChoice === 'attack'){
-        playerHP -= monsterAttack;
-        monsterHP -= playerAttack;
+        monsterHP -= characterAttack;
+        checkState(monsterHP, characterHP);
+        characterHP -= monsterAttack;
+        checkState(monsterHP, characterHP);
       }
       else {
-        monsterHP -= playerAttack;
+        monsterHP -= characterAttack;
+        checkState(monsterHP, characterHP);
       }
       break;
     case 'parry':
       if(monsterChoice === 'attack') {
-        playerHP -= monsterAttack * .5;
+        characterHP -= Math.floor(monsterAttack * .25);
+        checkState(monsterHP, characterHP);
       }
       break;
-    case 'potion':
-      break;
+    // case 'potion':
+    //   break;
   }
+  updateHealth();
+  chooseMonsterAction();
 };
+
+function checkState(monHP, charHP) {
+  if(monHP < 1) {
+    victory();
+  }
+  if(charHP < 1) {
+    loss();
+  }
+}
+
+async function victory() {
+  modalTitle.innerHTML = `Victory`;
+  modalBody.innerHTML = 'You Win!';
+  gainExp();
+  endModal.toggle();
+}
+
+function loss() {
+  modalTitle.innerHTML = 'Loss...';
+  modalBody.innerHTML = 'Wanna try again?';
+  endModal.toggle();
+}
 
 function chooseMonsterAction() {
   let monsterChoices = ['attack','roar']
-  monsterChoice = Math.floor(Math.random() * monsterChoices.length);
-  monsterAction.innerHTML = `The monster is going to <mark>${monsterChoices[monsterChoice]}</mark>`;
+  monsterChoice = monsterChoices[Math.floor(Math.random() * monsterChoices.length)];
+  monsterAction.innerHTML = `The monster is going to <mark>${monsterChoice}</mark>`;
 };
 
-chooseMonsterAction();
+async function gainExp() {
+  let charXP = parseInt(character.getAttribute('data-experience'));
+  charXP += parseInt(monster.getAttribute('data-experience'));
+  
+  let updatedChar = {};
+  if(charXP >= 100) {
+    charXP -= 100;
+    updatedChar.hitpoints = parseInt(character.getAttribute('data-hp')) + 5;
+    updatedChar.attack = parseInt(character.getAttribute('data-attack')) + 5;
+    updatedChar.level = parseInt(character.getAttribute('data-level')) + 1;
+  }
+  updatedChar.experience = charXP; 
+  updatedChar.gold = parseInt(character.getAttribute('data-gold')) + parseInt(monster.getAttribute('data-gold'));
+  await fetch(`/api/character/${character.getAttribute('data-id')}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedChar),
+      headers: { 'Content-Type': 'application/json' }
+  });
+}
 
-const playerActions = document.querySelectorAll('.player-action');
-console.log(playerActions);
-console.log(monsterAction);
-playerActions.forEach(btn => {
+characterActions.forEach(btn => {
   btn.addEventListener('click', (event) => {
     event.preventDefault();
     let button = event.target;
-    playerChoice = button.getAttribute('data-choice');
-    playerAction(playerChoice);
+    characterChoice = button.getAttribute('data-action');
+    characterAction(characterChoice);
   })
 });
+
+playAgain.addEventListener('click', (event) => {
+  event.preventDefault();
+  document.location.replace('/battle');
+});
+
+exit.addEventListener('click', (event) => {
+  event.preventDefault();
+  document.location.replace('/monsters');
+});
+
+chooseMonsterAction();

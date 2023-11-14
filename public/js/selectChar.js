@@ -14,7 +14,7 @@ charIds.forEach(btn => {
       headers: { 'Content-Type': 'application/json' }
     });
     if(response.ok) {
-      document.location.replace('/monsters');
+      document.location.replace('/battle');
     }
   });
 });
