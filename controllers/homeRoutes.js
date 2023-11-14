@@ -49,9 +49,10 @@ router.get('/battle', chosen,  async (req, res) => {
   const monster = monData.get({ plain: true });
   const charData = await Character.findByPk(req.session.chosenChar);
   const char = charData.get({ plain: true });
-  console.log(monster);
-  console.log(char); 
   res.render('battle', {monster: monster, character: char, loggedIn: req.session.loggedIn});
 });
 
+router.get('/create', (req, res) => {
+  res.render('character-creation', { loggedIn: req.session.loggedIn, userId: req.session.userId });
+})
 module.exports = router;

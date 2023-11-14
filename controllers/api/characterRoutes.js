@@ -8,26 +8,6 @@ const handleError = (res, error) => {
   res.status(500).json({ error: 'An error occurred' });
 };
 
-// Create a new character
-// router.post('/characters', async (req, res) => {
-//   try {
-//     const { name, hitpoints, attack, experience, level, gold, portrait, user_id } = req.body;
-//     const newCharacter = await Character.create({
-//       name,
-//       hitpoints,
-//       attack,
-//       experience,
-//       level,
-//       gold,
-//       portrait,
-//       user_id,
-//     });
-//     res.status(201).json(newCharacter);
-//   } catch (error) {
-//     handleError(res, error);
-//   }
-// });
-
 router.post('/', async (req, res) => {
   console.log(req.body);
   try {

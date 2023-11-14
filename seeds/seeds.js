@@ -14,20 +14,8 @@
       individualHooks: true,
     });
 
-    // const users = await User.findAll();
     await Character.bulkCreate(characterData);
-    // await seedPotions(); // Seed potions
-
-    // const characters = await Character.findAll();
-
-    // for (const potion of potionData) {  
-    //   await CharacterPotion.create({
-    //     active: true,
-    //     character_id: characters[Math.floor(Math.random() * characters.length)].id,
-    //     potion_id: potion.id,  //  the potion object has an 'id' property
-    //   });
-    // }
-     await seedMonsters();
+    await seedMonsters();
 
     process.exit(0);
   };

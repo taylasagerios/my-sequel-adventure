@@ -1,13 +1,53 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6">
-      {{>character-creator}}
+  <div class="row bg-dark bg-opacity-75 mt-5 shadow rounded text-center w-auto">
+    <h1>Create Your Character!</h1>
+  </div>
+  <div class="row bg-dark bg-opacity-75 shadow rounded justify-content-center">
+    <div class="col-auto">
+      <canvas id="canvas" width="250" height="500"></canvas>
     </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label for="character-name">Name</label>
-        <input class="form-input" type=""/>
+    <div class="col-auto">
+      <div class="row align-items-center">
+        <div class="col-2">
+          <label for="character-name" class="form-label">Name</label>
+        </div>
+        <div class="col-10">
+          <input type="text" class="form-control" id="char-name"/>
+        </div>
+      </div>
+      <br>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label for="character-hair" class="form-label">Hair Color</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" class="color-field form-control instance1" id="hair-color" value="#FFFF00" data-coloris>
+        </div>
+      </div>
+      <br>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label for="character-face" class="form-label">Face Color</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" class="color-field form-control instance2" id="face-color" value="#0000FF" data-coloris>
+        </div>
+      </div>
+      <br>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label for="character-shirt" class="form-label">Shirt Color</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" class="color-field form-control instance3" id="shirt-color" value="#008000" data-coloris>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <button class="btn btn-success" id="create-char" data-id="{{userId}}">Create Character</button>
       </div>
     </div>
   </div>
 </div>
+<script src="/js/coloris.min.js"></script>
+<script src="/js/create.js"></script>

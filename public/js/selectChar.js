@@ -1,5 +1,6 @@
 const charBtns = document.querySelectorAll('.choice-btn');
 
+//selects the current character
 charBtns.forEach(btn => {
   btn.addEventListener('click', async (event) =>  {
     event.preventDefault();
@@ -20,6 +21,7 @@ charBtns.forEach(btn => {
 
 const charDlt = document.querySelectorAll('.delete-btn');
 
+//deletes the clicked character
 charDlt.forEach(btn => {
   btn.addEventListener('click', async (event) => {
     event.preventDefault();
@@ -34,6 +36,8 @@ charDlt.forEach(btn => {
     }
   })
 })
+
+//creates a new default character
 document.getElementById('new-char').addEventListener('click', async (event) => {
   event.preventDefault();
   const button = event.target;
