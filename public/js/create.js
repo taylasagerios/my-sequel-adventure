@@ -5,7 +5,7 @@ var ctx = canvas.getContext('2d');
 const hairColorEl = document.getElementById('hair-color');
 const faceColorEl = document.getElementById('face-color');
 const shirtColorEl = document.getElementById('shirt-color');
-const charName = document.getElementById('char-name').value;
+
 
 let hairColor = hairColorEl.value;
 let faceColor = faceColorEl.value;
@@ -41,16 +41,17 @@ const createBtn = document.getElementById('create-char');
 createBtn.addEventListener('click', async (event) => {
   event.preventDefault();
   let btn = event.target;
-  if(charName && hairColor && faceColor && shirtColor){
+  let charName = document.getElementById('char-name').value;
+  if(charName){
     const response = await fetch('/api/character', {
       method: 'POST',
-      body: {
+      body: JSON.stringify({
         name: charName,
         hair_color: hairColor,
         face_color: faceColor,
         shirt_color: shirtColor,
         user_id: btn.getAttribute('data-id')
-      },
+      }),
       headers: { 'Content-Type': 'application/json'}
     });
     if(response.ok){

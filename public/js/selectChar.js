@@ -76,3 +76,7 @@ document.getElementById('delete-account').addEventListener('click', async (event
     }
   }
 });
+
+document.getElementById('custom-char').addEventListener('click', async (event) => {
+  document.location.replace('/create');
+})

@@ -8,6 +8,7 @@ const handleError = (res, error) => {
   res.status(500).json({ error: 'An error occurred' });
 };
 
+//create character
 router.post('/', async (req, res) => {
   console.log(req.body);
   try {
